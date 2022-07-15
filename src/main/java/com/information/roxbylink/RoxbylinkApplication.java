@@ -33,7 +33,7 @@ public class RoxbylinkApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(@NonNull CorsRegistry registry) {
-				registry.addMapping("/api/**").allowedOrigins("http://localhost:3000")
+				registry.addMapping("/api/**").allowedOrigins("http://localhost:3000", "https://roxbylink.vercel.app")
 						.allowedHeaders("Content-Type", "Accept")
 						.allowedMethods("POST", "GET", "DELETE");
 			}
