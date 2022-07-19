@@ -14,9 +14,12 @@ public class EventFacilityServices {
     private final EventFacilityRepo eventFacilityRepo;
     private final EventsMapperImpl eventFacilityMapper;
 
-    public EventFacilityDto connectEventToFacility(Long eventId, String code) {
+    public void connectEventToFacility(Long eventId, String code) {
         eventFacilityRepo.insertEventFacility(eventId, code);
-        return new EventFacilityDto(code, eventId);
+    }
+
+    public void deleteEventFacilityByEventId(Long eventId) {
+        eventFacilityRepo.deleteEventFacilityByEventId(eventId);
     }
 
     public List<EventFacilityDto> getAllEventsFacility(Long eventId) {

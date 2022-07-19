@@ -7,6 +7,7 @@ import com.information.roxbylink.events.dto.EventsByDateDto;
 import com.information.roxbylink.events.models.Customer;
 import com.information.roxbylink.events.models.Event;
 import com.information.roxbylink.events.models.EventFacility;
+import com.information.roxbylink.events.repositories.EventCustomerPrj;
 import com.information.roxbylink.events.repositories.EventsByDatePrj;
 import org.springframework.stereotype.Service;
 
@@ -65,5 +66,23 @@ public class EventsMapperImpl implements CustomerMapper, EventMapper, EventByDat
 
         facilities.forEach(facility -> facilityList.add(eventFacilityToDto(facility)));
         return facilityList;
+    }
+
+    public EventDto eventCustomerPrjToEventDto(EventCustomerPrj eventCustomerPrj) {
+        EventDto eventDto = eventToDto(eventCustomerPrj.getEventInfo());
+
+        List<String> facilities = new ArrayList<>();
+        facilities.add(eventCustomerPrj.getEventFacility().getId().getFacilityCode());
+
+        eventDto.setCustomer(customerToDto(eventCustomerPrj.getCustomer()));
+        eventDto.setFacilities(facilities);
+        return eventDto;
+    }
+
+    public List<EventDto> eventCustomerPrjListToEventDto(List<EventCustomerPrj> eventCustomerPrj) {
+        List<EventDto> eventList = new ArrayList<>(eventCustomerPrj.size());
+
+        eventCustomerPrj.forEach(event -> eventList.add(eventCustomerPrjToEventDto(event)));
+        return eventList;
     }
 }

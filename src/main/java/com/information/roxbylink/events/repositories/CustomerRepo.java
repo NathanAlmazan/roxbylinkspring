@@ -13,7 +13,7 @@ public interface CustomerRepo extends JpaRepository<Customer, Long> {
     Customer insertCustomer(String commName, String contactPerson, String email, String phone, String postAdd);
 
     @Modifying
-    @Query(value = "UPDATE customer SET comm_name = ?1, contact_person = ?2, email = ?3, phone = ?4, post_address = ?5 WHERE customer_id = ?6 RETURNING *", nativeQuery = true)
+    @Query(value = "UPDATE customer SET comm_name = ?1, contact_person = ?2, email = ?3, phone = ?4, post_address = ?5 WHERE customer_id = ?6", nativeQuery = true)
     void updateCustomer(String commName, String contactPerson, String email, String phone, String postAdd, Long customerId);
 
     @Query(value = "SELECT * FROM customer WHERE customer_id = ?1", nativeQuery = true)
